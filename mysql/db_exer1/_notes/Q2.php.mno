@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_q2" value="name:NATIONALITY_ID;datatype:int,name:NATIONALITY;datatype:string,name:NAME;datatype:string" />
+</info>

@@ -1,0 +1,81 @@
+use YOUR DATABE NAME; 
+
+SELECT * FROM products WHERE PRODUCT_ID GROUP BY `TYPE`; 
+
+SELECT products.PRODUCT_ID, products.PROD_NAME_, products.`TYPE`, products.PRICE, products.SUPPLIER_ID
+FROM suppliers, products  WHERE  suppliers.SUPPLIER_ID = '2002' AND products.SUPPLIER_ID = '2002';
+
+SELECT * FROM suppliers WHERE ADDRESS LIKE'%NSW';
+
+SELECT * FROM products ORDER BY PRICE DESC;
+
+UPDATE products SET PRICE = '750.00' WHERE PROD_NAME_ LIKE '%Ipad%';
+SELECT * FROM PRODUCTS WHERE PROD_NAME_='Ipad';
+
+SELECT * FROM products WHERE PRICE >= '800,00' ORDER BY PRICE DESC;
+
+ALTER TABLE suppliers ADD EMAIL TEXT; SELECT * FROM suppliers;
+
+UPDATE suppliers SET EMAIL = 'steve.jobs@gmail.com'  WHERE CONTACT_PERSON = '%steve%' ;
+UPDATE suppliers SET EMAIL = 'michael.j@yahoo.com.au'  WHERE CONTACT_PERSON = 'Michael' ;
+UPDATE suppliers SET EMAIL = 'ralf_lauren@yahoo.com'  WHERE CONTACT_PERSON = 'Ralf' ;
+UPDATE suppliers SET EMAIL = 'sarrah16@yahoo.com'  WHERE CONTACT_PERSON = 'Sarrah' ;
+
+SELECT * FROM suppliers WHERE EMAIL LIKE '%yahoo%';
+
+DELETE FROM products WHERE PROD_NAME_ LIKE 'shoes'; SELECT * FROM products;
+
+SELECT `TYPE`, MIN(PRICE) AS PRICE
+FROM products
+GROUP by `TYPE`;
+
+SELECT COUNT(CASE WHEN suppliers.SUPPLIER ='Apple' THEN `TYPE` ELSE 0 END) as "APPLE ",
+COUNT(CASE WHEN suppliers.SUPPLIER ='Nike' THEN `TYPE` ELSE 0 END) as "NIKE ",
+COUNT(CASE WHEN suppliers.SUPPLIER ='Ralf Lauren' THEN `TYPE` ELSE 0 END) as "RALF LAUREN ",
+COUNT(CASE WHEN suppliers.SUPPLIER ='Samsung' THEN `TYPE` ELSE 0 END) as "SAMSUNG ", products.`TYPE`
+FROM suppliers, products
+WHERE suppliers.SUPPLIER_ID = products.SUPPLIER_ID GROUP BY `TYPE`;
+
+SELECT suppliers.SUPPLIER, COUNT(CASE WHEN suppliers.SUPPLIER ='Apple' THEN `TYPE` ELSE 0 END) as "APPLE ",
+COUNT(CASE WHEN suppliers.SUPPLIER ='Nike' THEN `TYPE` ELSE 0 END) as "NIKE ",
+COUNT(CASE WHEN suppliers.SUPPLIER ='Ralf Lauren' THEN `TYPE` ELSE 0 END) as "RALF LAUREN ",
+COUNT(CASE WHEN suppliers.SUPPLIER ='Samsung' THEN `TYPE` ELSE 0 END) as "SAMSUNG "
+FROM suppliers, products
+WHERE suppliers.SUPPLIER_ID = products.SUPPLIER_ID GROUP BY SUPPLIER;
+
+SELECT AVG(CASE WHEN products.`TYPE` ='Garment' THEN PRICE ELSE 0 END) as "The average of the prices for all Garments sold by Nike is "
+
+SELECT SUM(CASE WHEN suppliers.SUPPLIER ='Apple' THEN PRICE ELSE 0 END) as "The sum of the prices for all the products sold by Apple is "
+FROM suppliers, products
+WHERE suppliers.SUPPLIER_ID = products.SUPPLIER_ID;
+
+SELECT PROD_NAME_, PRICE, SUPPLIER, CONTACT_PERSON 
+FROM products, suppliers 
+WHERE products.SUPPLIER_ID = suppliers.SUPPLIER_ID;
+
+SELECT SUPPLIER, `TYPE`, MAX(PRICE) AS PRICE
+FROM suppliers, products
+WHERE products.SUPPLIER_ID = suppliers.SUPPLIER_ID  GROUP BY SUPPLIER;
+
+
+SELECT products.PROD_NAME_, products.PRICE FROM products WHERE PRICE = (SELECT MIN(PRICE) FROM products);
+
+SELECT COUNT(SUPPLIER) AS "THE TOTAL NUMBER OF SUPPLIERS IS"
+FROM suppliers;
+
+SELECT suppliers.SUPPLIER, SUM(CASE WHEN suppliers.SUPPLIER ='Apple' THEN PRICE ELSE 0 END) as "APPLE ",
+SUM(CASE WHEN suppliers.SUPPLIER ='Nike' THEN PRICE ELSE 0 END) as "NIKE ",
+SUM(CASE WHEN suppliers.SUPPLIER ='Ralf Lauren' THEN PRICE ELSE 0 END) as "RALF LAUREN ",
+SUM(CASE WHEN suppliers.SUPPLIER ='Samsung' THEN PRICE ELSE 0 END) as "SAMSUNG "
+FROM suppliers, products
+WHERE suppliers.SUPPLIER_ID = products.SUPPLIER_ID GROUP BY SUPPLIER;
+
+
+
+
+
+
+
+
+
+
